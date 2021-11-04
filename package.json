@@ -8,7 +8,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo-google-fonts/roboto": "^0.2.0",
     "expo": "~41.0.1",
+    "expo-app-loading": "^1.2.1",
+    "expo-font": "~9.1.0",
     "expo-splash-screen": "~0.10.2",
     "expo-updates": "~0.5.4",
     "react": "16.13.1",
@@ -30,6 +33,7 @@
     "@types/styled-components-react-native": "^5.1.2",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",
+    "babel-plugin-root-import": "^6.6.0",
     "babel-preset-expo": "~8.3.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
