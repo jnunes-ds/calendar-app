@@ -1,6 +1,7 @@
 export default {
   colors: {
-    background: '#FFF',
+    backgroundPrimary: '#FFF',
+    backgroundSecondary: '#fcfcfc',
     text: '#1c1c1c',
     calendarInitialGradient: '#4a54dff9',
     calendarFinalGradient: '#15d4d8b0',

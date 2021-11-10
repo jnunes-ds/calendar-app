@@ -46,10 +46,12 @@ Header.Container = styled.View`
   flex: 2;
   justify-content: center;
   align-items: center;
+
 `;
 
 Header.Content = styled.View`
-  background-color: grey;
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
+  background-color: white;
   width: 100%;
   height: 100%;
   flex-direction: row;
@@ -67,21 +69,21 @@ Avatar.Container = styled.View`
 `;
 
 Avatar.Content = styled.View`
- width: 45px;
-  height: 45px;
+ width: 50px;
+  height: 50px;
   border-radius: 38px;
   overflow: hidden;
 `;
 
 Avatar.Avatar = styled.Image<ImageProps>`
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
 `;
 
 Avatar.IconContainer = styled.View`
   position: absolute;
-  top: 30%;
-  left: 30%;
+  top: 35%;
+  left: 35%;
   width: 20px;
   height: 20px;
   border-radius: 12.5px;
@@ -125,11 +127,15 @@ export const LifeStyle: LifeStyleProps = {} as LifeStyleProps;
 LifeStyle.Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.title};
   font-size: ${RFValue(23)}px;
-  color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.backgroundPrimary};
+  margin-left: 20px;
 `;
 
 LifeStyle.Message = styled.Text`
   font-family: ${({ theme }) => theme.fonts.text};
   font-size: ${RFValue(14)}px;
-  color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.backgroundPrimary};
+  margin-top: 8px;
+  margin-left: 20px;
+  line-height: 20px;
 `;

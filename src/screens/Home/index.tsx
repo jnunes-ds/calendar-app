@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import MyAvatar from '~/assets/user.jpg';
 import ChatIcon from '~/assets/chat_icon.png';
@@ -15,9 +15,28 @@ import {
     LifeStyle
 } from './styles'
 import { ImageBackground } from 'react-native';
+import { Calendar, DayProps, MarkedDateProps } from '~/components/Calendar';
+import { generateInterval } from '../../components/Calendar/generateInterval';
 
 
 export function Home(){
+  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>({} as DayProps);
+  const [markedDates, setMarkedDates] = useState<MarkedDateProps>({} as MarkedDateProps);
+
+  const handleChangeDate = useCallback((date: DayProps) => {
+    let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+    let end = date;
+
+    if (start.timestamp > end.timestamp) {
+      start = end;
+      end = start;
+    }
+    setLastSelectedDate(end);
+    const interval = generateInterval(start, end);
+    setMarkedDates(interval);
+    const firstDate = Object.keys(interval)[0];
+    const lastDate = Object.keys(interval)[Object.keys(interval).length - 1];
+  }, [lastSelectedDate, setLastSelectedDate, markedDates, setMarkedDates]);
 
     return (
         <Container>
@@ -51,7 +70,7 @@ export function Home(){
                   recommendations
                 </LifeStyle.Message>
               </ImageBackground>
-            <Title> Hello World! </Title>
+            <Calendar onDayPress={handleChangeDate} markedDate={markedDates} />
             </Body>
         </Container>
     );
