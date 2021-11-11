@@ -11,12 +11,14 @@ import {
     Logo,
     Chat,
     Body,
-    Title,
-    LifeStyle
+    LifeStyle,
+    CalendarModal
 } from './styles'
 import { ImageBackground } from 'react-native';
 import { Calendar, DayProps, MarkedDateProps } from '~/components/Calendar';
 import { generateInterval } from '../../components/Calendar/generateInterval';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Feather } from '@expo/vector-icons';
 
 
 export function Home(){
@@ -47,7 +49,12 @@ export function Home(){
                 <Avatar.Avatar source={MyAvatar} />
                 </Avatar.Content>
                 <Avatar.IconContainer>
-                <Avatar.Icon />
+                  <LinearGradient
+                    // Button Linear Gradient
+                    colors={['#4a54df', '#15d4d8']}
+                    style={{ width: '100%', height: '100%', justifyContent:'center', alignItems: 'center' }}>
+                  <Feather name='menu' color='white' />
+                </LinearGradient>
                 </Avatar.IconContainer>
               </Avatar.Container>
               <Logo.Container>
@@ -70,7 +77,25 @@ export function Home(){
                   recommendations
                 </LifeStyle.Message>
               </ImageBackground>
-            <Calendar onDayPress={handleChangeDate} markedDate={markedDates} />
+              <CalendarModal.Container transparent>
+                <CalendarModal.Content>
+                  <Calendar onDayPress={handleChangeDate} markedDate={markedDates} />
+                  <CalendarModal.Calendar>
+                  <CalendarModal.Button.Container>
+                    <LinearGradient
+                    // Button Linear Gradient
+                    colors={['#4a54df', '#15d4d8']}
+
+                    style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                    <CalendarModal.Button.Label>
+                      Apply
+                    </CalendarModal.Button.Label>
+                  </LinearGradient>
+                  </CalendarModal.Button.Container>
+                  </CalendarModal.Calendar>
+
+                </CalendarModal.Content>
+            </CalendarModal.Container>
             </Body>
         </Container>
     );

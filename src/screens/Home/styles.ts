@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import { RFValue } from 'react-native-responsive-fontsize';
-import { ImageProps } from 'react-native';
+import { ImageProps, ModalProps, TextProps, TouchableOpacityProps } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface AvatarProps {
   Container: React.FC;
@@ -29,6 +30,18 @@ interface HeaderProps {
 interface LifeStyleProps {
   Title: React.FC;
   Message: React.FC;
+}
+
+interface CalendarButtonProps {
+  Container: React.FC<TouchableOpacityProps>;
+  Label: React.FC<TextProps>;
+}
+
+interface CalendarModalProps {
+  Container: React.FC<ModalProps>;
+  Content: React.FC;
+  Calendar: React.FC;
+  Button: CalendarButtonProps;
 }
 
 export const Container = styled.View`
@@ -88,6 +101,7 @@ Avatar.IconContainer = styled.View`
   height: 20px;
   border-radius: 12.5px;
   background-color: red;
+  overflow: hidden;
 `;
 
 Avatar.Icon = styled.Image``;
@@ -138,4 +152,38 @@ LifeStyle.Message = styled.Text`
   margin-top: 8px;
   margin-left: 20px;
   line-height: 20px;
+`;
+
+export const CalendarModal: CalendarModalProps = {} as CalendarModalProps;
+
+CalendarModal.Container = styled.Modal<ModalProps>`
+`;
+
+CalendarModal.Content = styled.View`
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 75%;
+`;
+
+CalendarModal.Calendar = styled.View`
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.backgroundPrimary};
+`;
+
+CalendarModal.Button = {} as CalendarButtonProps;
+
+CalendarModal.Button.Container = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 55px;
+  border-radius: 30px;
+  overflow: hidden;
+`;
+
+CalendarModal.Button.Label = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.text};
+  font-size: ${RFValue(18)}px;
+  color: ${({ theme }) => theme.colors.backgroundPrimary};
+  font-weight: 700;
 `;

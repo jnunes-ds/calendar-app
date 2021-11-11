@@ -30,7 +30,7 @@ interface DayProps {
 
 interface CalendarProps {
   markedDate: MarkedDateProps;
-  onDayPress(date: DateObject): void;
+  onDayPress(date: DayProps): void;
 }
 
 function Calendar({ markedDate, onDayPress }: CalendarProps) {
@@ -46,7 +46,7 @@ function Calendar({ markedDate, onDayPress }: CalendarProps) {
         />
       )}
       headerStyle={{
-        backgroundColor: theme.colors.calendarInitialGradient,
+        backgroundColor: theme.colors.backgroundPrimary,
         borderBottomWidth: 0.5,
         borderBottomColor: theme.colors.calendarFinalGradient,
         paddingBottom: 10,

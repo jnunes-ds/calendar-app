@@ -5,8 +5,8 @@ import { getPlatformDate } from '../../utils/getPlatformDate';
 import theme from '~/styles/theme';
 
 interface GetCurrentColorProps {
-  rgbNumbers1: [number, number, number];
-  rgbNumbers2: [number, number, number];
+  rgbNumbers1: [number, number, number, number];
+  rgbNumbers2: [number, number, number, number];
   lenght: number;
   index: number;
 }
@@ -42,15 +42,21 @@ export function generateInterval(start: DayProps, end: DayProps) {
     let number3 = rgbNumbers1[2] >= rgbNumbers2[2]
       ? rgbNumbers1[2] - rgbNumbers2[2]
       : rgbNumbers2[2] - rgbNumbers1[2];
+    let number4 = rgbNumbers1[3] >= rgbNumbers2[3]
+      ? rgbNumbers1[3] - rgbNumbers2[3]
+      : rgbNumbers2[3] - rgbNumbers1[3]
     number1 = (number1 / lenght) * index;
     number2 = (number2 / lenght) * index;
     number3 = (number3 / lenght) * index;
+    number4 = (number4 / lenght) * index;
 
     number1 = parseInt(number1 + rgbNumbers1[0]);
     number2 = parseInt(number2 + rgbNumbers1[1]);
     number3 = parseInt(number3 + rgbNumbers1[2]);
+    number4 = number4 + rgbNumbers1[3] / 10;
+    console.log(number4)
 
-    const currentColor = [number1, number2, number3];
+    const currentColor = [number1, number2, number3, number4];
     return { currentColor };
   }
 
@@ -58,25 +64,23 @@ export function generateInterval(start: DayProps, end: DayProps) {
   allDays.forEach((item, index) => {
     const date = format(getPlatformDate(item), 'yyyy-MM-dd');
 
+    const color1 = hexToRGB(theme.colors.calendarInitialGradient);
+    const color2 = hexToRGB(theme.colors.calendarFinalGradient);
     const newCollor = {
-      rgbNumbers1: hexToRGB(theme.colors.calendarInitialGradient),
-      rgbNumbers2: hexToRGB(theme.colors.calendarFinalGradient),
+      rgbNumbers1: [...color1, 0.83],
+      rgbNumbers2: [...color2, 0.11],
       lenght: allDays.length,
       index
     } as GetCurrentColorProps;
-
     const { currentColor } = getCurrentColor(newCollor);
-    console.log(currentColor)
 
     interval = {
       ...interval,
       [date]: {
         color:
         start.dateString === date
-        ? theme.colors.calendarInitialGradient
-        : end.dateString === date
         ? theme.colors.calendarFinalGradient
-        : `rgb(${currentColor[0]}, ${currentColor[1]}, ${currentColor[2]})`,
+        : `rgba(${currentColor[0]}, ${currentColor[1]}, ${currentColor[2]}, ${currentColor[3]})`,
 
         textColor:
         start.dateString === date || end.dateString === date
