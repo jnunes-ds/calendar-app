@@ -47,7 +47,6 @@ function Calendar({ markedDate, onDayPress }: CalendarProps) {
       )}
       headerStyle={{
         backgroundColor: theme.colors.backgroundPrimary,
-        borderBottomWidth: 0.5,
         borderBottomColor: theme.colors.calendarFinalGradient,
         paddingBottom: 10,
         marginBottom: 10,
@@ -64,8 +63,7 @@ function Calendar({ markedDate, onDayPress }: CalendarProps) {
         },
       }}
       firstDay={1}
-      minDate={new Date()}
-      markingType="period"
+      markingType='period'
       markedDates={markedDate}
       onDayPress={onDayPress}
     />

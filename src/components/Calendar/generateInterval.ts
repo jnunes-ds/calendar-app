@@ -54,7 +54,6 @@ export function generateInterval(start: DayProps, end: DayProps) {
     number2 = parseInt(number2 + rgbNumbers1[1]);
     number3 = parseInt(number3 + rgbNumbers1[2]);
     number4 = number4 + rgbNumbers1[3] / 10;
-    console.log(number4)
 
     const currentColor = [number1, number2, number3, number4];
     return { currentColor };
@@ -86,9 +85,13 @@ export function generateInterval(start: DayProps, end: DayProps) {
         start.dateString === date || end.dateString === date
         ? theme.colors.backgroundPrimary
         : theme.colors.backgroundPrimary,
+
+
       },
     };
   });
+
+  console.log(interval);
 
   return interval;
 }

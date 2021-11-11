@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 import { RFValue } from 'react-native-responsive-fontsize';
-import { ImageProps, ModalProps, TextProps, TouchableOpacityProps } from 'react-native';
+import { ImageProps, ModalProps, TextProps, TouchableOpacityProps, TouchableWithoutFeedbackProps } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AntDesign } from '@expo/vector-icons';
 
 interface AvatarProps {
   Container: React.FC;
@@ -33,6 +34,7 @@ interface LifeStyleProps {
 }
 
 interface CalendarButtonProps {
+  SupraConainer: React.FC;
   Container: React.FC<TouchableOpacityProps>;
   Label: React.FC<TextProps>;
 }
@@ -42,7 +44,21 @@ interface CalendarModalProps {
   Content: React.FC;
   Calendar: React.FC;
   Button: CalendarButtonProps;
+  CloseButton: CloseButtonProps;
 }
+
+interface CloseButtonProps {
+  Container: React.FC<TouchableWithoutFeedbackProps>;
+  Content: React.FC;
+  Text: React.FC;
+};
+
+type IconType = React.ComponentProps<typeof AntDesign>;
+
+interface OpenCalendarButtonProps {
+  Container: React.FC<TouchableWithoutFeedbackProps>;
+  Icon: React.FC<IconType>;
+};
 
 export const Container = styled.View`
   flex: 1;
@@ -136,6 +152,12 @@ export const Body = styled.View`
   width: 100%;
 `;
 
+export const Content = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const LifeStyle: LifeStyleProps = {} as LifeStyleProps;
 
 LifeStyle.Title = styled.Text`
@@ -161,16 +183,21 @@ CalendarModal.Container = styled.Modal<ModalProps>`
 
 CalendarModal.Content = styled.View`
   background-color: rgba(0, 0, 0, 0.5);
-  padding-top: 75%;
+  padding-top: 70%;
+
 `;
 
 CalendarModal.Calendar = styled.View`
-  justify-content: center;
-  align-items: center;
+  padding-top: 20px;
+  padding-horizontal: 0;
   background-color: ${({ theme }) => theme.colors.backgroundPrimary};
 `;
 
 CalendarModal.Button = {} as CalendarButtonProps;
+
+CalendarModal.Button.SupraConainer = styled.View`
+  align-items: center;
+`;
 
 CalendarModal.Button.Container = styled.TouchableOpacity`
   justify-content: center;
@@ -187,3 +214,19 @@ CalendarModal.Button.Label = styled.Text`
   color: ${({ theme }) => theme.colors.backgroundPrimary};
   font-weight: 700;
 `;
+
+CalendarModal.CloseButton = {} as CloseButtonProps;
+
+CalendarModal.CloseButton.Container = styled.TouchableWithoutFeedback<TouchableWithoutFeedbackProps>``;
+
+CalendarModal.CloseButton.Content = styled.View`
+  flex-direction: row;
+`;
+
+CalendarModal.CloseButton.Text = styled.Text``;
+
+export const OpenCalendarButton: OpenCalendarButtonProps = {} as OpenCalendarButtonProps;
+
+OpenCalendarButton.Container = styled.TouchableWithoutFeedback``;
+
+OpenCalendarButton.Icon = styled(AntDesign)<IconType>``;
